@@ -28,9 +28,23 @@ class MyPrompt(Cmd):
         except Exception as gen:
             print gen
             return
+
     def do_gitcommit(self, args):
         """Wrapper for git commit"""
-        pass
+        print "Running git push."
+        options = dict()
+        options['type'] = "gitpush"
+        options['message'] = args
+        try:
+            if Wrapper.run_git(options)[0] == 0:
+                print "Successfully committed changes " + str(options['message'])
+        except subprocess.CalledProcessError as e:
+            print e
+            print e.output
+            return
+        except Exception as gen:
+            print gen
+            return
 
     def do_gitpush(self, args):
         """Wrapper for git push"""
