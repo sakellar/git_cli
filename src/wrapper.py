@@ -1,5 +1,5 @@
 from ExecuteCommand import call_popen
-
+import subprocess
 
 class Wrapper(object):
     """
@@ -24,45 +24,68 @@ class Wrapper(object):
 
     @staticmethod
     def git_cmd():
+        """
+        Gitcmd helper function
+        """
         git_command = ['git']
         return git_command
 
     @staticmethod
-    def _add_git_argument(git_command, options, argument):
-        if argument in options:
-            git_command.append(formated_arg)
-            git_command.append(options[argument])
-
-    @staticmethod
-    def gitpush(options):
-        git_command = Wrapper.git_cmd()[:]
-
-        git_command.append('push')
-        git_command.append('origin')
-        git_command.append(options["branch"])
-
-    @staticmethod
-    def gitpull(options):
-        git_command = Wrapper.git_cmd()[:]
-
-        git_command.append('pull')
-        git_command.append('origin')
-        git_command.append(options["branch"])
+    def check_args(options):
+        """
+        Checks for the number of arguments
+        """
+        if len(options['repo']) == 0:
+            raise subprocess.CalledProcessError(-1, options['type'], output="You must enter a repository name as an  argument")
+        if len(options['repo'].split()) == 1:
+            return
+        else:
+            raise subprocess.CalledProcessError(-2, options['type'], output="Number of arguments should be 1")
 
     @staticmethod
     def gitcommit(options):
+        """
+        Calls git commit
+        """
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('commit')
-        git_command.append(options['file'])
-        git_command.append('-m')
-        git_command.append("message")
+        git_command.append(options["repo"])
+
+        return call_popen(git_command)
+
+    @staticmethod
+    def gitpull(options):
+        """
+        Calls git pull
+        """
+        Wrapper.check_args(options)
+        git_command = Wrapper.git_cmd()[:]
+
+        git_command.append('pull')
+        git_command.append(options["repo"])
+
+        return call_popen(git_command)
+
+    @staticmethod
+    def gitpush(options):
+        """
+        Calls git push
+        """
+        Wrapper.check_args(options)
+        git_command = Wrapper.git_cmd()[:]
+
+        git_command.append('push')
+        git_command.append(options["repo"])
+
+        return call_popen(git_command)
 
     @staticmethod
     def gitclone(options):
         """
-        Calls git backup
+        Calls git clone
         """
+        Wrapper.check_args(options)
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('clone')

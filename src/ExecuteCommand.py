@@ -18,6 +18,3 @@ def call_popen(command, live_logging=True):
     if ret_code:
         raise subprocess.CalledProcessError(ret_code, command, output=output)
     return ret_code, command, output
-
-#command = ['git', 'branch', '-a']
-#call_popen(command)
