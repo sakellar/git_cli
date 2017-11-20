@@ -37,7 +37,7 @@ class MyPrompt(Cmd):
         options['message'] = args
         try:
             if Wrapper.run_git(options)[0] == 0:
-                print "Successfully committed changes " + str(options['repo'])
+                print "Successfully committed changes with message:" + str(options['message'])
         except subprocess.CalledProcessError as e:
             print e
             print e.output
