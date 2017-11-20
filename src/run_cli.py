@@ -31,13 +31,13 @@ class MyPrompt(Cmd):
 
     def do_gitcommit(self, args):
         """Wrapper for git commit"""
-        print "Running git commit."
+        print "Running git commit. Message should be in quotes"
         options = dict()
         options['type'] = "gitcommit"
         options['message'] = args
         try:
             if Wrapper.run_git(options)[0] == 0:
-                print "Successfully committed changes " + str(options['message'])
+                print "Successfully committed changes " + str(options['repo'])
         except subprocess.CalledProcessError as e:
             print e
             print e.output

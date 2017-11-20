@@ -31,9 +31,9 @@ class Wrapper(object):
         return git_command
 
     @staticmethod
-    def check_args(options):
+    def check_args_repo(options):
         """
-        Checks for the number of arguments
+        Checks for the number of arguments for repository
         """
         if len(options['repo']) == 0:
             raise subprocess.CalledProcessError(-1, options['type'], output="You must enter a repository name as an  argument")
@@ -43,10 +43,21 @@ class Wrapper(object):
             raise subprocess.CalledProcessError(-2, options['type'], output="Number of arguments should be 1")
 
     @staticmethod
+    def check_args_message(options):
+        """
+        Checks for the number of arguments for message to commit
+        """
+        if len(options['message']) == 0:
+            raise subprocess.CalledProcessError(-1, options['type'], output="You must enter a message in order to commit")
+        else:
+            return
+
+    @staticmethod
     def gitcommit(options):
         """
         Calls git commit
         """
+        Wrapper.check_args_message(options)
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('commit')
@@ -61,7 +72,7 @@ class Wrapper(object):
         """
         Calls git pull
         """
-        Wrapper.check_args(options)
+        Wrapper.check_args_repo(options)
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('pull')
@@ -74,7 +85,7 @@ class Wrapper(object):
         """
         Calls git push
         """
-        Wrapper.check_args(options)
+        Wrapper.check_args_repo(options)
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('push')
@@ -87,7 +98,7 @@ class Wrapper(object):
         """
         Calls git clone
         """
-        Wrapper.check_args(options)
+        Wrapper.check_args_repo(options)
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('clone')
