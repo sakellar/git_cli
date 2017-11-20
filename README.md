@@ -31,24 +31,24 @@ Quitting.
 
 Run gitclone command (Make sure you have git installed):
 A bad result...
-$gitcli> gitclone git@github.com:sakellar/git_cli.git
+```$gitcli> gitclone git@github.com:sakellar/git_cli.git
 Running git clone.
 fatal: destination path 'git_cli' already exists and is not an empty directory.
 Command '['git', 'clone', 'git@github.com:sakellar/git_cli.git']' returned non-zero exit status 128
-
+```
 Run gitpush command (Make sure you are inside the repository you want to push):
-$gitcli> gitpush git@github.com:sakellar/git_cli.git
+```$gitcli> gitpush git@github.com:sakellar/git_cli.git
 Running git push.
 Everything up-to-date
 Successfully pushed to repository git@github.com:sakellar/git_cli.git
-
+```
 Run gitpull command (Make sure you are inside the repository you want to pull from):
-$gitcli> gitpull git@github.com:sakellar/git_cli.git
+```$gitcli> gitpull git@github.com:sakellar/git_cli.git
 Running git pull.
 From github.com:sakellar/git_cli
  * branch            HEAD       -> FETCH_HEAD
 Already up-to-date.
 Successfully pulled from repository git@github.com:sakellar/git_cli.git
-
+```
 
 # Testing
