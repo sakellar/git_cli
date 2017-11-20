@@ -37,7 +37,10 @@ Command runs git push with the <repository> argument, branch.*.remote configurat
 ### gitpush python API
  ```
 def run_git(options):
-  """ {'type':'gitpush', 'repo':'repositoryname'} -> git push repositoryname command output""" 
+  """
+  {'type':'gitpush', 'repo':'repositoryname'} -> git push <repositoryname> command output
+   raises  subprocess.CalledProcessError  if repo is empty or there are more than one repo
+  """ 
  ```
 
 ### NAME
@@ -46,9 +49,42 @@ gitpull - Wrapper on git pull which fetches from and integrates with a specific 
 gitpull [reponame]
 ### DESCRIPTION
 Incorporates changes from a remote repository into the current branch. In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
+### gitpull python API
  ```
 def run_git(options):
-  """ {'type':'gitpull', 'repo':'repositoryname'} -> git pull repositoryname command output""" 
+  """
+  {'type':'gitpull', 'repo':'repositoryname'} -> git pull <repositoryname> command output
+   raises  subprocess.CalledProcessError  if repo is empty or there are more than one repo
+  """ 
+ ```
+### NAME
+gitclone - Wrapper on git clone to clone a repository into a new directory
+### SYNOPSIS
+gitclone [reponame]
+### DESCRIPTION
+Clones a repository into a newly created directory, creates remote-tracking branches for each branch in the cloned repository (visible using git branch -r), and creates and checks out an initial branch that is forked from the cloned repository’s currently active branch.
+### gitclone python API
+ ```
+def run_git(options):
+  """
+  {'type':'gitclone', 'repo':'repositoryname'} -> git clone <repositoryname command> output
+  raises  subprocess.CalledProcessError  if repo is empty or there are more than one repo
+  """ 
+ ```
+
+### NAME
+gitcommit - Wrapper on git commit to record changes to the repository
+### SYNOPSIS
+gitcommit [reponame]
+### DESCRIPTION
+Stores the current contents of the index in a new commit along with a log message from the user describing the changes.
+### gitclone python API
+ ```
+def run_git(options):
+  """ 
+   {'type':'gitcommit', 'message':'message'} -> git commit -a -m <message> command output
+   raises  subprocess.CalledProcessError  if message is empty
+  """ 
  ```
 
 ## cli tool Documentation
@@ -107,3 +143,18 @@ Successfully committed changes with message :  <fixed issues with git commit>
 ```
 
 ## Testing
+
+To test  code you can run inside tst directory
+```
+bash run_tests.sh
+```
+Alternatively you can run explicitily tests
+```
+python -m unittest test_executor
+```
+```
+python -m unittest test_wrapper
+```
+```
+python ../src/run_cli.py
+```
