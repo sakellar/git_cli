@@ -28,24 +28,28 @@ python setup.py install
 
 ## API Documentation
 
-###NAME
+### NAME
 gitpush - Wrapper on git push which updates remote refs along with associated objects for a specific repository
-###SYNOPSIS
+### SYNOPSIS
 gitpush [reponame]
-###DESCRIPTION
+### DESCRIPTION
 Command runs git push with the <repository> argument, branch.*.remote configuration for the current branch is consulted to determine where to push. If the configuration is missing, it defaults to origin.
-###gitpush python API
+### gitpush python API
  ```
 def run_git(options):
-  """ {'type':'gitpush', 'repo':'repositoryname'}""" -> git push repositoryname command output
+  """ {'type':'gitpush', 'repo':'repositoryname'} -> git push repositoryname command output""" 
  ```
 
-###NAME
+### NAME
 gitpull - Wrapper on git pull which fetches from and integrates with a specific repository
-###SYNOPSIS
+### SYNOPSIS
 gitpull [reponame]
-###DESCRIPTION
+### DESCRIPTION
 Incorporates changes from a remote repository into the current branch. In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
+ ```
+def run_git(options):
+  """ {'type':'gitpull', 'repo':'repositoryname'} -> git pull repositoryname command output""" 
+ ```
 
 ## cli tool Documentation
 Make sure that run_cli.py has the correct PYTHONPATH or is in same directory with src code
