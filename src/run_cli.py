@@ -31,9 +31,9 @@ class MyPrompt(Cmd):
 
     def do_gitcommit(self, args):
         """Wrapper for git commit"""
-        print "Running git push."
+        print "Running git commit."
         options = dict()
-        options['type'] = "gitpush"
+        options['type'] = "gitcommit"
         options['message'] = args
         try:
             if Wrapper.run_git(options)[0] == 0:

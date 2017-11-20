@@ -50,6 +50,7 @@ class Wrapper(object):
         git_command = Wrapper.git_cmd()[:]
 
         git_command.append('commit')
+        git_command.append('-a')
         git_command.append('-m')
         git_command.append(options["message"])
 
