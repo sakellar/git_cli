@@ -2,11 +2,11 @@
 A Git binding library, wrapping the Git cli tool, for the following actions:
 1.	clone repositories
 2.	commit changes to repositories
-3.	push from remote repositories
-4.	pull to remote repositories
+3.	push to remote repositories
+4.	pull from remote repositories
 
 ## REQUIREMENTS
-Installing on Linux
+Installing on Linux:
 If you want to install the basic Git tools on Linux via a binary installer, you can generally do so through the basic package-management tool that comes with your distribution. If you’re on Fedora for example (or any closely-related RPM-based distro such as RHEL or CentOS), you can use dnf:
 ```
 $ sudo dnf install git-all
