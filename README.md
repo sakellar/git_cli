@@ -23,7 +23,6 @@ Starting git command line interface...
 gitcli> help
 
 Documented commands (type help <topic>):
-========================================
 gitclone  gitcommit  gitpull  gitpush  help  quit
 
 Run quit command to exit the tool:
