@@ -6,7 +6,7 @@ A Git binding library, wrapping the Git cli tool, for the following actions:
 4.	pull from remote repositories
 
 ## REQUIREMENTS
-Installing on Linux:
+Installing on Linux.
 If you want to install the basic Git tools on Linux via a binary installer, you can generally do so through the basic package-management tool that comes with your distribution. If you’re on Fedora for example (or any closely-related RPM-based distro such as RHEL or CentOS), you can use dnf:
 ```
 $ sudo dnf install git-all
@@ -25,6 +25,7 @@ If you have donwloaded source code:
 python setup.py install
 
 ## API Documentation
+
 
 ## cli tool Documentation
 Make sure that run_cli.py has the correct PYTHONPATH or is in same directory with src code
@@ -70,6 +71,15 @@ From github.com:sakellar/git_cli
  * branch            HEAD       -> FETCH_HEAD
 Already up-to-date.
 Successfully pulled from repository git@github.com:sakellar/git_cli.git
+```
+
+Run gitcommit command (Make sure you are inside the repository you want to commit):
+```
+gitcli> gitcommit fixed issues with git commit
+Running git commit.
+[master 1a3198d] fixed issues with git commit
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+Successfully committed changes with message :  <fixed issues with git commit>
 ```
 
 ## Testing
