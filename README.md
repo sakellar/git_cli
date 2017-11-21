@@ -29,73 +29,83 @@ python setup.py install
 ## API Documentation
 
 ### gitcommit
+
 #### NAME
 gitcommit - Wrapper on git commit to record changes to the repository
+
 #### ARGUMENTS
 dict with key='message' and value=<commit message> (Required)
 Example:
 ```
 options['message'] = <commit message> 
 ```
+
 #### OUTPUT
 git commit -a -m <message> command output
 
 ### gitpush
+
 #### NAME
-```
 gitpush - Wrapper on git push which updates remote refs along with associated objects for a specific repository
-```
+
 #### ARGUMENTS
-```
 dict with key='repo' and value=<repository_name> (Required)
 Example:
+```
 options['repo'] = <repository name>
 ```
+
 #### OUTPUT
 ```
 git push <repositoryname> command output
 ```
+
 ### gitpull
+
 #### NAME
-```
 gitpull - Wrapper on git pull which fetches from and integrates with a specific repository
-```
+
 #### ARGUMENTS
-```
 dict with key='repo' and value=<repository_name> (Required)
 Example:
+```
 options['repo'] = <repository name>
 ```
+
 #### OUTPUT
 ```
 git pull <repositoryname> command output
 ```
+
 ### gitclone
 #### NAME
-```
 gitclone - Wrapper on git clone to clone a repository into a new directory
-```
+
 #### ARGUMENTS
-```
 dict with key='repo' and value=<repository_name>
+Example:
+```
 options['repo'] = <repository name> (Required)
 ```
+
 #### OUTPUT
 ```
 git clone <repositoryname> command output
 ```
+
 ### run_git
-```
 Runs either gitpush, gitpull, gitclone, gitcommit
-```
 #### ARGUMENTS
-```
+
 dict with keys, values.
 key 'type' and value=<command_to_run> (Required)
 key 'repo' and value=<repository_name> (Optional)
 key 'message' and value = <commit_message> (Optional)
-Example. options = {'type':'gitpush', 'repo':'repositoryname'}
+Example:
 ```
+options = {'type':'gitpush', 'repo':'repositoryname'}
+```
+
 #### OUTPUT
 ```
 gitpush, gitpull, gitclone, gitcommit command output
