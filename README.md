@@ -67,8 +67,9 @@ Example:
 options['repo'] = <repository name>
 ```
 #### OUTPUT
+```
 git pull <repositoryname> command output
-
+```
 ### gitclone
 #### NAME
 ```
