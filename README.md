@@ -28,64 +28,62 @@ python setup.py install
 
 ## API Documentation
 
-### NAME
-gitpush - Wrapper on git push which updates remote refs along with associated objects for a specific repository
-### SYNOPSIS
-gitpush [reponame]
-### DESCRIPTION
-Command runs git push with the <repository> argument, branch.*.remote configuration for the current branch is consulted to determine where to push. If the configuration is missing, it defaults to origin.
-### gitpush python API
- ```
-def run_git(options):
-  """
-  {'type':'gitpush', 'repo':'repositoryname'} -> git push <repositoryname> command output
-   raises  subprocess.CalledProcessError  if repo is empty or there are more than one repo
-  """ 
- ```
-
-### NAME
-gitpull - Wrapper on git pull which fetches from and integrates with a specific repository
-### SYNOPSIS
-gitpull [reponame]
-### DESCRIPTION
-Incorporates changes from a remote repository into the current branch. In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
-### gitpull python API
- ```
-def run_git(options):
-  """
-  {'type':'gitpull', 'repo':'repositoryname'} -> git pull <repositoryname> command output
-   raises  subprocess.CalledProcessError  if repo is empty or there are more than one repo
-  """ 
- ```
-### NAME
-gitclone - Wrapper on git clone to clone a repository into a new directory
-### SYNOPSIS
-gitclone [reponame]
-### DESCRIPTION
-Clones a repository into a newly created directory, creates remote-tracking branches for each branch in the cloned repository (visible using git branch -r), and creates and checks out an initial branch that is forked from the cloned repository’s currently active branch.
-### gitclone python API
- ```
-def run_git(options):
-  """
-  {'type':'gitclone', 'repo':'repositoryname'} -> git clone <repositoryname command> output
-  raises  subprocess.CalledProcessError  if repo is empty or there are more than one repo
-  """ 
- ```
-
-### NAME
+### gitcommit
+#### NAME
 gitcommit - Wrapper on git commit to record changes to the repository
-### SYNOPSIS
-gitcommit [reponame]
-### DESCRIPTION
-Stores the current contents of the index in a new commit along with a log message from the user describing the changes.
-### gitclone python API
- ```
-def run_git(options):
-  """ 
-   {'type':'gitcommit', 'message':'message'} -> git commit -a -m <message> command output
-   raises  subprocess.CalledProcessError  if message is empty
-  """ 
- ```
+#### ARGUMENTS
+dict with key='message' and value=<commit message> (Required)
+Example:
+```
+options['message'] = <commit message> 
+```
+#### OUTPUT
+git commit -a -m <message> command output
+
+### gitpush
+#### NAME
+gitpush - Wrapper on git push which updates remote refs along with associated objects for a specific repository
+#### ARGUMENTS
+dict with key='repo' and value=<repository_name> (Required)
+Example:
+```
+options['repo'] = <repository name>
+```
+#### OUTPUT
+git push <repositoryname> command output
+
+### gitpull
+#### NAME
+gitpull - Wrapper on git pull which fetches from and integrates with a specific repository
+#### ARGUMENTS
+dict with key='repo' and value=<repository_name> (Required)
+Example:
+```
+options['repo'] = <repository name>
+```
+#### OUTPUT
+git pull <repositoryname> command output
+
+### gitclone
+#### NAME
+gitclone - Wrapper on git clone to clone a repository into a new directory
+#### ARGUMENTS
+dict with key='repo' and value=<repository_name>
+options['repo'] = <repository name> (Required)
+#### OUTPUT
+git clone <repositoryname> command output
+
+### run_git
+Runs either gitpush, gitpull, gitclone, gitcommit
+#### ARGUMENTS
+dict with keys, values.
+key 'type' and value=<command_to_run> (Required)
+key 'repo' and value=<repository_name> (Optional)
+key 'message' and value = <commit_message> (Optional)
+Example. options = {'type':'gitpush', 'repo':'repositoryname'}
+#### OUTPUT
+gitpush, gitpull, gitclone, gitcommit command output
+
 
 ## cli tool Documentation
 Make sure that run_cli.py has the correct PYTHONPATH or is in same directory with src code
@@ -103,11 +101,19 @@ $gitcli> help
 Documented commands (type help <topic>):
 gitclone  gitcommit  gitpull  gitpush  help  quit
 ```
+
 Run quit command to exit the tool:
 ```
 $gitcli> quit
 Quitting.
 ```
+
+### NAME
+gitclone - Wrapper on git clone to clone a repository into a new directory
+### SYNOPSIS
+gitclone [reponame]
+### DESCRIPTION
+Clones a repository into a newly created directory, creates remote-tracking branches for each branch in the cloned repository (visible using git branch -r), and creates and checks out an initial branch that is forked from the cloned repository’s currently active branch.
 Run gitclone command (Make sure you have git installed):
 A bad result...
 ```
@@ -116,6 +122,12 @@ Running git clone.
 fatal: destination path 'git_cli' already exists and is not an empty directory.
 Command '['git', 'clone', 'git@github.com:sakellar/git_cli.git']' returned non-zero exit status 128
 ```
+### NAME
+gitpull - Wrapper on git pull which fetches from and integrates with a specific repository
+### SYNOPSIS
+gitpull [reponame]
+### DESCRIPTION
+Incorporates changes from a remote repository into the current branch. In its default mode, git pull is shorthand for git fetch followed by git merge FETCH_HEAD.
 Run gitpush command (Make sure you are inside the repository you want to push):
 ```
 $gitcli> gitpush git@github.com:sakellar/git_cli.git
@@ -132,7 +144,12 @@ From github.com:sakellar/git_cli
 Already up-to-date.
 Successfully pulled from repository git@github.com:sakellar/git_cli.git
 ```
-
+### NAME
+gitcommit - Wrapper on git commit to record changes to the repository
+### SYNOPSIS
+gitcommit [reponame]
+### DESCRIPTION
+Stores the current contents of the index in a new commit along with a log message from the user describing the changes.
 Run gitcommit command (Make sure you are inside the repository you want to commit):
 ```
 gitcli> gitcommit fixed issues with git commit
